@@ -17,10 +17,11 @@ class Comentario {
     return comentarios[0]
   }
 
-  static async create ({ incidencia_id, usuario_id, comentario }) {
+  static async create ({ id_incidencia, id_usuario, comentario }) {
+    console.log(id_incidencia)
     const nuevaComentario = await pool.execute(
       'INSERT INTO comentarios (id_incidencia, id_usuario, texto_comentario) VALUES (?, ?, ?)',
-      [incidencia_id, usuario_id, comentario]
+      [id_incidencia, id_usuario, comentario]
     )
     return nuevaComentario
   }

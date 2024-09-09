@@ -22,12 +22,13 @@ export const getComentariosByIncidencia = async (req, res) => {
 
 export const createComentario = async (req, res) => {
   try {
-    const { incidencia_id, usuario_id, comentario } = req.body
-    if (!incidencia_id || !usuario_id || !comentario) {
+    console.log(req.body)
+    const { id_incidencia, id_usuario, comentario } = req.body
+    if (!id_incidencia || !id_usuario || !comentario) {
       return res.status(400).json({ message: 'Faltan datos para crear el comentario' })
     }
 
-    const nuevoComentario = await Comentario.create({ incidencia_id, usuario_id, comentario })
+    const nuevoComentario = await Comentario.create({ id_incidencia, id_usuario, comentario })
     res.status(201).json({ message: 'Comentario creado', nuevoComentario })
   } catch (error) {
     res.status(500).json({ message: error.message })

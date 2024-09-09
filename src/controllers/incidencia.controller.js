@@ -11,15 +11,16 @@ export const index = async (req, res) => {
 }
 
 export const find = async (req, res) => {
+  console.log('llegue hasta aui')
   try {
     const { id } = req.params
-    const incidencia = await Incidencia.getById(id)
 
+    const incidencia = await Incidencia.getById(id)
     if (incidencia.length === 0) {
       return res.status(404).json({ message: 'Incidencia no encontrada' })
     }
 
-    res.json(incidencia[0])
+    res.json(incidencia)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

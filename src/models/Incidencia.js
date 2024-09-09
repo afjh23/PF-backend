@@ -8,7 +8,7 @@ class Incidencia {
   }
 
   static async getById (id) {
-    const incidencia = await pool.execute('SELECT * FROM incidencias WHERE id_incidencia = ?', [id])
+    const incidencia = await pool.execute('SELECT i.id_incidencia, i.id_usuario, i.asunto, i.tipo, i.descripcion, i.imagen, i.estado, i.fecha_reporte, c.id_comentarios, c.id_usuario AS comentario_id_usuario, c.texto_comentario, c.fecha_creacion AS comentario_fecha_creacion, CONCAT(u.nombre," ", u.apellido) AS nombre, u.rol AS usuario_cargo FROM incidencias i LEFT JOIN comentarios c ON i.id_incidencia = c.id_incidencia LEFT JOIN usuarios u ON c.id_usuario = u.id WHERE i.id_incidencia = ?', [id])
     return incidencia[0]
   }
 
